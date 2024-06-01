@@ -28,7 +28,7 @@ Install containerd
     sudo apt-get update && sudo apt-get install -y containerd
 
 Configure containerd
-<code>
+```
     sudo mkdir /etc/containerd
     sudo containerd config default | sudo tee /etc/containerd/config.toml
     sudo systemctl restart containerd
@@ -48,7 +48,7 @@ Configure containerd
     
     sudo apt-get update $ sudo apt-get install -y kubelet kubeadm kubectl
     sudo apt-mark hold kubelet kubeadm kubectl
-</code>
+```
 --- END ALL NODES ---
 
 ### Ref: 
