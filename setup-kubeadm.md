@@ -3,32 +3,37 @@ Set hostname to control plan and worker nodes
 
 Update the hosts file with names and IPs of control plan server and worker nodes
 
----- ON ALL NODES ----
-Enable Linux modules for containerd (it'll be loaded when the server start)
+# ON ALL NODES
+### Enable Linux modules for containerd (it'll be loaded when the server start)
+```bash
     cat << EOF | sodu tee /etc/modules-load.d/containerd.conf
     > overlay
     > br_netfilter
     EOF
-
-Load manually the Linux modules
+````
+### Load manually the Linux modules
+```bash
     sudo modprobe overlay
     sudo modprobe br_netfilter
-
-Update the sysctl for k8s cri
+```
+### Update the sysctl for k8s cri
+```bash
     cat << EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
     > net.bridge.bridge-nf-call-iptables  = 1
     > net.ipv4.ip_forward                 = 1
     > net.bridge.bridge-nf-call-ip6tables = 1
     EOF
-
-Run command to apply the sysctl configurations
-    sudo sysctl --system
-
-Install containerd
-    sudo apt-get update && sudo apt-get install -y containerd
-
-Configure containerd
 ```
+### Run command to apply the sysctl configurations
+```bash
+    sudo sysctl --system
+```
+### Install containerd
+```bash
+    sudo apt-get update && sudo apt-get install -y containerd
+```
+### Configure containerd
+```bash
     sudo mkdir /etc/containerd
     sudo containerd config default | sudo tee /etc/containerd/config.toml
     sudo systemctl restart containerd
@@ -49,7 +54,6 @@ Configure containerd
     sudo apt-get update $ sudo apt-get install -y kubelet kubeadm kubectl
     sudo apt-mark hold kubelet kubeadm kubectl
 ```
---- END ALL NODES ---
 
 ### Ref: 
 https://medium.com/@subhampradhan966/how-to-install-kubernetes-cluster-kubeadm-setup-on-ubuntu-22-04-step-by-step-guide-dfcf33253f5f
