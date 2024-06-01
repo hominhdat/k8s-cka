@@ -1,3 +1,4 @@
+## Setup K8s cluster with kubeadm
 Set hostname to control plan and worker nodes
 
 Update the hosts file with names and IPs of control plan server and worker nodes
